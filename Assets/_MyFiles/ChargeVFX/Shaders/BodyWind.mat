@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GroundWind
+  m_Name: BodyWind
   m_Shader: {fileID: -6465566751694194690, guid: 56bf2029735ade14a9da20b549f38779,
     type: 3}
   m_Parent: {fileID: 0}
@@ -60,6 +60,6 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 3.5071914, g: 3.5071914, b: 3.5071914, a: 1}
-    - _MainTexSpeed: {r: 0, g: -0.5, b: 0, a: 0}
-    - _MainTexTiling: {r: 6, g: 2, b: 0, a: 0}
+    - _MainTexSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - _MainTexTiling: {r: 3, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
