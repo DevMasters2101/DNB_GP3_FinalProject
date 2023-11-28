@@ -12,8 +12,10 @@ public class KiBlastAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            KiCharge.instance.UseKi(10);
-            KiAttack();
+            if (KiCharge.instance.UseKi(KiCharge.instance.GetMaxKi()))
+            { 
+                KiAttack();
+            }
         }
     }
 
