@@ -820,71 +820,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1789903661}
     m_Modifications:
-    - target: {fileID: 114177969244973874, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2062263869357405215, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3359944006666595515, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: stopAction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: ShapeModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: EmissionModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197881606659068470, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6497610270846684575, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.272
-      objectReference: {fileID: 0}
     - target: {fileID: 6625762830936440414, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -935,20 +870,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7591547258180423237, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8178633388138813708, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
         type: 3}
       propertyPath: m_Name
       value: Aura_GRP
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905657579305045583, guid: 1b8e6cf09567fd14da701378bcf9d7b6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

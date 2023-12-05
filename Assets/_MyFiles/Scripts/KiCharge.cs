@@ -18,6 +18,9 @@ public class KiCharge : MonoBehaviour
     public static KiCharge instance;
     PlayerInput playerInput;
     Coroutine chargingCoroutine;
+
+    private Animator player_Animator;
+
     private void Awake()
     {
         instance = this;
@@ -25,6 +28,7 @@ public class KiCharge : MonoBehaviour
         playerInput.Enable();
         playerInput.gameplay.recharge.performed += StartCharging;
         playerInput.gameplay.recharge.canceled += StopCharging;
+        player_Animator = GetComponent<Animator>();
     }
 
     private void StopCharging(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -33,6 +37,7 @@ public class KiCharge : MonoBehaviour
         if (chargingCoroutine != null)
         { 
             StopCoroutine(chargingCoroutine);
+            player_Animator.SetBool("ChargeLoop", false);
             chargingCoroutine = null;
         }
     }
@@ -81,6 +86,7 @@ public class KiCharge : MonoBehaviour
         if (Input.GetKey(KeyCode.C))
         {
             StartCoroutine(Gather());
+            player_Animator.SetTrigger("ChargeUp");
             chargeParticle.Play();
         }
     }
@@ -91,6 +97,7 @@ public class KiCharge : MonoBehaviour
         {
             currentKi += Time.deltaTime * chargeRate;
             kiBar.value = currentKi;
+            player_Animator.SetBool("ChargeLoop", true);
             yield return new WaitForEndOfFrame();
         }
     }
