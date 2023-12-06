@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class KiBlastAttack : MonoBehaviour
 {
@@ -8,21 +11,75 @@ public class KiBlastAttack : MonoBehaviour
     public Transform kiBlastSpawn;
     public float kiForce = 20f;
 
-    private void Update()
+    public static KiBlastAttack instance;
+    NewPlayerInput playerInput;
+    PlayerInput pi;
+    Coroutine blastChargingCoroutine;
+    Coroutine blastCoroutine;
+
+    //private Animator playerAnim;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        instance = this;
+        playerInput = new NewPlayerInput();
+        pi = GetComponent<PlayerInput>();
+        playerInput.Enable();
+        playerInput.gameplay.KiAttack.performed += StartBlastCharging;
+        playerInput.gameplay.KiAttack.canceled += StopBlastCharging;
+    }
+
+    private void StopBlastCharging(InputAction.CallbackContext context)
+    {
+        if(blastChargingCoroutine != null)
         {
-            if (KiCharge.instance.UseKi(KiCharge.instance.GetMaxKi()))
-            { 
-                KiAttack();
+            StopCoroutine(blastChargingCoroutine);
+            blastCoroutine = StartCoroutine(BlastHold());
+            //playerAnim.SetBool("LoopEndBlast", true);
+            KiAttack();
+
+            if (kiBlastPreFab != null)
+            {
+                //player_Animator.SetBool("LoopEndBlast", true);
+                pi.actions.FindAction("move").Disable();
             }
+            else
+            {
+                StopCoroutine(blastCoroutine);
+                //player_Animator.SetBool("LoopEndBlast", false);
+                pi.actions.FindAction("move").Enable();
+            }
+
+            blastChargingCoroutine = null;
+        }
+    }
+
+    private void StartBlastCharging(InputAction.CallbackContext context)
+    {
+        if (KiCharge.instance.UseKi(KiCharge.instance.GetMaxKi()))
+        {
+            blastChargingCoroutine = StartCoroutine(BlastGather());
+            pi.actions.FindAction("move").Disable();
+            //playerAnim.SetBool("ChargeBlast", true);
         }
     }
 
     private void KiAttack()
     {
-        GameObject rocketClone = Instantiate(kiBlastPreFab, kiBlastSpawn.transform.position, kiBlastSpawn.transform.rotation);
-        Rigidbody rBody = rocketClone.GetComponent<Rigidbody>();
+        GameObject blastClone = Instantiate(kiBlastPreFab, kiBlastSpawn.transform.position, kiBlastSpawn.transform.rotation);
+        Rigidbody rBody = blastClone.GetComponent<Rigidbody>();
         rBody.AddForce(-kiBlastSpawn.transform.forward * kiForce, ForceMode.Impulse);
+    }
+
+    private IEnumerator BlastGather()
+    {
+        //player_Animator.SetBool("StartBlast", true);
+        yield return new WaitForEndOfFrame();
+    }
+
+    private IEnumerator BlastHold()
+    {
+        //player_Animator.SetBool("EndBlast", true);
+        yield return new WaitForEndOfFrame();
     }
 }

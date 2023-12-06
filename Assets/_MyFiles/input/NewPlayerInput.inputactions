@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "NewPlayerInput",
     "maps": [
         {
             "name": "gameplay",
@@ -9,6 +9,15 @@
                     "name": "recharge",
                     "type": "Button",
                     "id": "50e69822-d11b-485d-ac87-40ba8983f05f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "KiAttack",
+                    "type": "Button",
+                    "id": "c6c540c5-2b8c-4c47-8792-8f5a6d7b1f89",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -24,6 +33,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "recharge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19bbd6c2-40b8-4a02-816d-d780c57e8e5b",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KiAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
