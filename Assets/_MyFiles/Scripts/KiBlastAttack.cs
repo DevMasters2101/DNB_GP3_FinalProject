@@ -17,7 +17,7 @@ public class KiBlastAttack : MonoBehaviour
     Coroutine blastChargingCoroutine;
     Coroutine blastCoroutine;
 
-    //private Animator playerAnim;
+    private Animator playerAnim;
 
     private void Awake()
     {
@@ -27,6 +27,7 @@ public class KiBlastAttack : MonoBehaviour
         playerInput.Enable();
         playerInput.gameplay.KiAttack.performed += StartBlastCharging;
         playerInput.gameplay.KiAttack.canceled += StopBlastCharging;
+        playerAnim = GetComponent<Animator>();
     }
 
     private void StopBlastCharging(InputAction.CallbackContext context)
@@ -35,18 +36,17 @@ public class KiBlastAttack : MonoBehaviour
         {
             StopCoroutine(blastChargingCoroutine);
             blastCoroutine = StartCoroutine(BlastHold());
-            //playerAnim.SetBool("LoopEndBlast", true);
+            playerAnim.SetBool("LoopEndBlast", true);
             KiAttack();
 
             if (kiBlastPreFab != null)
             {
-                //player_Animator.SetBool("LoopEndBlast", true);
                 pi.actions.FindAction("move").Disable();
             }
             else
             {
                 StopCoroutine(blastCoroutine);
-                //player_Animator.SetBool("LoopEndBlast", false);
+                playerAnim.SetBool("LoopEndBlast", false);
                 pi.actions.FindAction("move").Enable();
             }
 
@@ -60,7 +60,7 @@ public class KiBlastAttack : MonoBehaviour
         {
             blastChargingCoroutine = StartCoroutine(BlastGather());
             pi.actions.FindAction("move").Disable();
-            //playerAnim.SetBool("ChargeBlast", true);
+            playerAnim.SetBool("ChargeBlast", true);
         }
     }
 
@@ -73,13 +73,13 @@ public class KiBlastAttack : MonoBehaviour
 
     private IEnumerator BlastGather()
     {
-        //player_Animator.SetBool("StartBlast", true);
+        playerAnim.SetBool("StartBlast", true);
         yield return new WaitForEndOfFrame();
     }
 
     private IEnumerator BlastHold()
     {
-        //player_Animator.SetBool("EndBlast", true);
+        playerAnim.SetBool("EndBlast", true);
         yield return new WaitForEndOfFrame();
     }
 }
