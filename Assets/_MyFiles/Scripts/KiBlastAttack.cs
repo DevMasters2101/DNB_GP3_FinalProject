@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class KiBlastAttack : MonoBehaviour
 {
     public GameObject kiBlastPreFab;
     public Transform kiBlastSpawn;
     public float kiForce = 20f;
-
+    
     public static KiBlastAttack instance;
     NewPlayerInput playerInput;
     PlayerInput pi;
     Coroutine blastChargingCoroutine;
     Coroutine blastCoroutine;
+    Coroutine beamCoroutine;
+    [SerializeField] private VisualEffect blastBeam;
+    public bool resetSeedOnPlay;
 
     private Animator playerAnim;
 
@@ -28,6 +33,11 @@ public class KiBlastAttack : MonoBehaviour
         playerInput.gameplay.KiAttack.performed += StartBlastCharging;
         playerInput.gameplay.KiAttack.canceled += StopBlastCharging;
         playerAnim = GetComponent<Animator>();
+        blastBeam.Stop();
+    }
+
+    private void Update()
+    {
     }
 
     private void StopBlastCharging(InputAction.CallbackContext context)
@@ -35,23 +45,11 @@ public class KiBlastAttack : MonoBehaviour
         if(blastChargingCoroutine != null)
         {
             StopCoroutine(blastChargingCoroutine);
-            blastCoroutine = StartCoroutine(BlastHold());
-            playerAnim.SetBool("LoopEndBlast", true);
-            KiAttack();
-
-            if (kiBlastPreFab != null)
-            {
-                pi.actions.FindAction("move").Disable();
-            }
-            else
-            {
-                StopCoroutine(blastCoroutine);
-                playerAnim.SetBool("LoopEndBlast", false);
-                pi.actions.FindAction("move").Enable();
-            }
+            blastCoroutine = StartCoroutine(BlastRelease());
 
             blastChargingCoroutine = null;
         }
+
     }
 
     private void StartBlastCharging(InputAction.CallbackContext context)
@@ -77,9 +75,19 @@ public class KiBlastAttack : MonoBehaviour
         yield return new WaitForEndOfFrame();
     }
 
-    private IEnumerator BlastHold()
+    private IEnumerator BlastRelease()
     {
+        pi.actions.FindAction("move").Disable();
+        playerAnim.SetBool("ChargeBlast", false);
+        playerAnim.SetBool("StartBlast", false);
         playerAnim.SetBool("EndBlast", true);
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1);
+        playerAnim.SetBool("EndBlast", false);
+        playerAnim.SetBool("LoopEndBlast", true);
+        blastBeam.Play();
+        KiAttack();
+        yield return new WaitForSeconds(3);
+        playerAnim.SetBool("LoopEndBlast", false);
+        pi.actions.FindAction("move").Enable();
     }
 }
